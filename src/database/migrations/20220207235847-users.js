@@ -17,7 +17,7 @@ module.exports = {
         },
         nickname: {
           type: Sequelize.STRING(15),
-          default: ''
+          defaultValue: ''
         },
         email: {
           type: Sequelize.STRING,

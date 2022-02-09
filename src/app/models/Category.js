@@ -1,7 +1,7 @@
-import {Model, DataTypes} from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 
 class Category extends Model {
-    
+
     static init(sequelize) {
         super.init({
             name: DataTypes.STRING,
@@ -9,6 +9,7 @@ class Category extends Model {
             sequelize
         })
     }
+
 }
 
 export default Category;
