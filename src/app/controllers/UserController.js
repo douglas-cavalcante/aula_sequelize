@@ -7,7 +7,6 @@
 */
 
 import User from '../models/User';
-
 class UserController {
 
   async index(req, res) {
@@ -50,7 +49,6 @@ class UserController {
     return res.json(userUpdated)
   }
 
-
   async destroy(req, res) {
     const { id } = req.params;
     const user = await User.findByPk(id);
@@ -59,8 +57,6 @@ class UserController {
     
     return res.json({})
   }
-
-
 
 }
 
