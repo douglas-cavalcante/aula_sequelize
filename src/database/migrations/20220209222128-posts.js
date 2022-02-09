@@ -35,7 +35,7 @@ module.exports = {
         cover_url: {
           type: Sequelize.STRING,
         },
-        is_fake_new: {
+        is_faker_new: {
           type: Sequelize.BOOLEAN,
           defaultValue: false
         },

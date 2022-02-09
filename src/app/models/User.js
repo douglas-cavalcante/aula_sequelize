@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 
 class User extends Model {
+
   static init(sequelize) {
     super.init({
       name: DataTypes.STRING,
@@ -10,6 +11,16 @@ class User extends Model {
     }, {
       sequelize
     })
+  }
+
+  static associate(models) {
+    this.hasMany(
+      models.Post,
+      {
+        foreignKey: 'user_id',
+        as: 'posts'
+      }
+    );
   }
 
 }

@@ -7,10 +7,28 @@
 */
 
 import User from '../models/User';
+import {Op} from 'sequelize';
 class UserController {
 
   async index(req, res) {
-    const users = await User.findAll()
+
+    const word = req.query.word ? req.query.word : '';
+  
+    const users = await User.findAll({
+      include: [
+        {
+          association: 'posts',
+          required:false,
+          where: {
+            title:  {
+              [Op.iLike]: `%${word}%`
+            },
+            status: true
+          }
+        }
+      ]
+    })
+    
     return res.json(users)
   }
 
