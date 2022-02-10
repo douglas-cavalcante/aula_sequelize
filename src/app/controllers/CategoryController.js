@@ -7,17 +7,40 @@
 */
 import Category from '../models/Category';
 
+import createCategoryValidation from '../../validations/category/createCategorySchema';
+
 class CategoryController {
 
   async index(req, res) {
-    const categories = await Category.findAll()
-    return res.json(categories)
+    try {
+      const categories = await Category.findAll({
+        attributes: ['id', 'name']
+      })
+      return res.json(categories)
+    } catch (error) {
+      return res.status(401).json(
+        { message: 'Houve um erro ao tentar listar as categorias' }
+      )
+    }
   }
 
   async store(req, res) {
-    const data = req.body
-    const category = await Category.create(data)
-    return res.json(category)
+    try {
+      const data = req.body
+
+      if (!(await createCategoryValidation.isValid(data))) {
+        return res.status(401).json({ message: 'Campos inválidos' })
+      }
+
+      const category = await Category.create(data)
+
+      return res.json(category)
+
+    } catch (error) {
+      return res.status(400).json({
+        message: 'Houve um erro ao tentar realizar o cadastro da categoria'
+      })
+    }
 
   }
 }

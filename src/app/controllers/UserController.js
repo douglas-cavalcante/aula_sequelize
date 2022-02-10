@@ -7,28 +7,34 @@
 */
 
 import User from '../models/User';
-import {Op} from 'sequelize';
+import { Op } from 'sequelize';
+
 class UserController {
 
   async index(req, res) {
 
     const word = req.query.word ? req.query.word : '';
-  
+
     const users = await User.findAll({
       include: [
         {
           association: 'posts',
-          required:false,
+          required: false,
           where: {
-            title:  {
+            title: {
               [Op.iLike]: `%${word}%`
             },
             status: true
           }
         }
-      ]
-    })
-    
+      ],
+      limit: 10,
+      order: [
+        ["name", "ASC"],
+      ],
+    },
+    )
+
     return res.json(users)
   }
 
@@ -70,9 +76,9 @@ class UserController {
   async destroy(req, res) {
     const { id } = req.params;
     const user = await User.findByPk(id);
-  
+
     await user.destroy()
-    
+
     return res.json({})
   }
 

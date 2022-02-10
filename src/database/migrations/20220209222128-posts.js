@@ -22,6 +22,7 @@ module.exports = {
           type: Sequelize.INTEGER,
           references: {model: 'categories', key: 'id'},
           onUpdate: 'CASCADE',
+
           allowNull: false
         },
         title: {
@@ -32,10 +33,10 @@ module.exports = {
           type: Sequelize.TEXT,
           allowNull: false,
         },
-        cover_url: {
+        url_cover: {
           type: Sequelize.STRING,
         },
-        is_faker_new: {
+        is_fake_new: {
           type: Sequelize.BOOLEAN,
           defaultValue: false
         },

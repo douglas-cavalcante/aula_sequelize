@@ -15,11 +15,18 @@ class Post extends Model {
   }
 
   static associate(models) {
+    
     this.belongsTo(
       models.User, {
       foreignKey: 'user_id', // Qual chave estrangeira dentro de Posts que representa o usuario
       as: 'user' // nome do relacionamento
     });
+
+    this.belongsTo(models.Category, {
+      foreignKey: 'category_id',
+      as: 'category'
+    });
+
   }
 
 }
