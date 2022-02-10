@@ -3,7 +3,6 @@ import Post from '../models/Post';
 
 import createPostValidation from '../../validations/post/createPostSchema';
 
-
 class PostController {
   async index(req, res) {
 

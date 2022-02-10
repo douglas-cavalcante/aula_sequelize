@@ -5,13 +5,16 @@
   update()
   destroy()
 */
+
+import sequelize  from 'sequelize'
+
 import Category from '../models/Category';
 
 import createCategoryValidation from '../../validations/category/createCategorySchema';
 
 class CategoryController {
 
-  async index(req, res) {
+  async index(_req, res) {
     try {
       const categories = await Category.findAll({
         attributes: ['id', 'name']
@@ -43,6 +46,20 @@ class CategoryController {
     }
 
   }
+
+  async show(req, res) {
+    /*
+    const {id} = req.params;
+    const category = await Category.findByPk(id)
+    return res.json(category)
+    */
+    const {id} = req.params;
+
+    const [results] = await sequelize.query(`SELECT * FROM categories where id = ${id}`);
+
+    return res.json(results);
+  }
+
 }
 
 export default new CategoryController()
