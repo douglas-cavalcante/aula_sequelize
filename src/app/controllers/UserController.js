@@ -38,6 +38,7 @@ class UserController {
 
       return res.json(users)
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ message: 'Houve um erro ao tentar listar os usuários' })
     }
   }

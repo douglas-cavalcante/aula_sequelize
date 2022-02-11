@@ -9,11 +9,9 @@ class PostController {
     try {
       const { id } = req.params;
 
-      const posts = await Post.findAll({
+      const posts = await Post.addScope('activesPost').findAll({
         where: {
-          user_id: id,
-          status: true,
-          is_faker_new: false
+          user_id: id
         }
       })
 

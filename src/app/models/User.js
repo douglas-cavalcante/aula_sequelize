@@ -12,6 +12,8 @@ class User extends Model {
       password_hash: DataTypes.STRING,
     }, {
       sequelize,
+      paranoid: true, // paranoid
+      deletedAt: 'deleted_at', // paranoid
       hooks: {
         beforeCreate: async (user) => {
           user.password_hash = await bcrypt.hash(user.password_hash, 8)
@@ -22,8 +24,8 @@ class User extends Model {
             host: "smtp.mailtrap.io",
             port: 2525,
             auth: {
-              user: "seu usuario :)" ,
-              pass: "sua senha :)"
+              user: "seu usuario",
+              pass: "sua senha"
             }
           });
 

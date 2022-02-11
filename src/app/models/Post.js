@@ -8,8 +8,14 @@ class Post extends Model {
       content: DataTypes.TEXT,
       url_cover: DataTypes.STRING,
       status: DataTypes.BOOLEAN,
-      is_faker_new: DataTypes.BOOLEAN,
+      is_fake_new: DataTypes.BOOLEAN,
     }, {
+      scopes: {
+        activesPost: {
+          status: true,
+          is_fake_new: false
+        }
+      },
       sequelize
     })
   }
